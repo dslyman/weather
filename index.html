@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Weather</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-sky="default" data-night="false">
+  <div class="app">
+
+    <!-- Search bar and "use my location" button -->
+    <header class="topbar">
+      <form id="search-form" class="search" role="search">
+        <svg class="icon-stroke" viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="11" cy="11" r="7"></circle>
+          <path d="M21 21l-4.35-4.35"></path>
+        </svg>
+        <label class="visually-hidden" for="city-input">City name</label>
+        <input id="city-input" type="search" placeholder="Search for a city" autocomplete="off">
+        <button type="submit" class="btn-search">Search</button>
+      </form>
+
+      <button type="button" id="location-btn" class="btn-location">
+        <svg class="icon-stroke" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+          <circle cx="12" cy="10" r="3"></circle>
+        </svg>
+        Use my location
+      </button>
+    </header>
+
+    <!-- Loading state -->
+    <div id="loading" class="card loading" role="status" hidden>
+      <div class="spinner"></div>
+      <p id="loading-text">Fetching weather…</p>
+    </div>
+
+    <!-- Error message -->
+    <div id="error" class="card error" role="alert" hidden>
+      <svg class="icon-stroke" viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="12" cy="12" r="10"></circle>
+        <path d="M12 8v4M12 16h.01"></path>
+      </svg>
+      <p id="error-text"></p>
+    </div>
+
+    <!-- Weather results -->
+    <main id="weather" hidden>
+
+      <!-- Current weather -->
+      <section class="card current" aria-labelledby="place-name">
+        <div class="current-head">
+          <div>
+            <h1 id="place-name" class="place-name"></h1>
+            <p id="place-region" class="soft"></p>
+          </div>
+          <div class="datetime">
+            <p id="current-date" class="current-date"></p>
+            <p id="current-time" class="soft"></p>
+          </div>
+        </div>
+
+        <div class="current-main">
+          <div id="current-icon" class="current-icon"></div>
+          <div>
+            <p class="temp"><span id="current-temp">--</span><span class="temp-unit">°C</span></p>
+            <p id="current-condition" class="condition"></p>
+            <p class="range soft">
+              <span>High <b id="current-high">--</b></span>
+              <span>Low <b id="current-low">--</b></span>
+            </p>
+          </div>
+        </div>
+
+        <div class="stats">
+          <div class="stat">
+            <svg class="icon-stroke" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"></path>
+            </svg>
+            <div>
+              <span class="stat-label">Feels like</span>
+              <span class="stat-value" id="stat-feels">--</span>
+            </div>
+          </div>
+          <div class="stat">
+            <svg class="icon-stroke" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path>
+            </svg>
+            <div>
+              <span class="stat-label">Humidity</span>
+              <span class="stat-value" id="stat-humidity">--</span>
+            </div>
+          </div>
+          <div class="stat">
+            <svg class="icon-stroke" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"></path>
+            </svg>
+            <div>
+              <span class="stat-label">Wind</span>
+              <span class="stat-value" id="stat-wind">--</span>
+            </div>
+          </div>
+          <div class="stat">
+            <svg class="icon-stroke" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+              <circle cx="12" cy="12" r="3"></circle>
+            </svg>
+            <div>
+              <span class="stat-label">Visibility</span>
+              <span class="stat-value" id="stat-visibility">--</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5-day forecast -->
+      <section class="forecast" aria-labelledby="forecast-title">
+        <h2 id="forecast-title" class="forecast-title">5-Day Forecast</h2>
+        <ul id="forecast-grid" class="forecast-grid"></ul>
+      </section>
+    </main>
+
+    <footer class="footer">
+      Weather data by <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo.com</a>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
